@@ -8,13 +8,13 @@ import "database/sql"
 // Queryer is a single method interface encompassing the action of Querying a
 // datastore.
 type Queryer interface {
-	Query(SQL string, args ...interface{}) (sql.Rows, error)
+	Query(string, ...interface{}) (*sql.Rows, error)
 }
 
 // QueryRower is a single method interface encompasing the action of
 // QueryRowing a datastore.
 type QueryRower interface {
-	QueryRow(SQL string, args ...interface{}) sql.Row
+	QueryRow(string, ...interface{}) *sql.Row
 }
 
 // Queryest encompasses the Queryer and QueryRower interfaces.
