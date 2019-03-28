@@ -34,9 +34,3 @@ type DataStore interface {
 	Queryest
 	Execer
 }
-
-// Opener is a single method interface encompassing the action of Opening a
-// SQL DB connection.
-type Opener interface {
-	Open(driverName, dataSourceName string) (*sql.DB, error)
-}
