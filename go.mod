@@ -1,3 +1,3 @@
-module github.com/tjper/sqltool
+module github.com/tjper/store
 
 go 1.12
