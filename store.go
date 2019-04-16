@@ -32,8 +32,8 @@ type Execer interface {
 	Exec(SQL string, args ...interface{}) (sql.Result, error)
 }
 
-// Storer encompasses the Queryest and Exerer interfaces.
-type Storer interface {
+// QueryExecer encompasses the Queryest and Exerer interfaces.
+type QueryExecer interface {
 	Queryest
 	Execer
 }
@@ -62,10 +62,18 @@ type Updater interface {
 	Update(Execer) error
 }
 
+// Storer encompasses various store interfaces.
+type Storer interface {
+	Selector
+	Inserter
+	Deletor
+	Updater
+}
+
 // Store is a type that manages the access and modification of a
 // Storer.
 type Store struct {
-	Conn Storer
+	Conn QueryExecer
 }
 
 // DefaultPostgresLocalhostConnstr is the default connection string for a
@@ -96,7 +104,7 @@ func New(options ...func(*Store)) *Store {
 }
 
 // WithConn sets the Store.Conn field to a Storer object.
-func WithConn(c Storer) func(*Store) {
+func WithConn(c QueryExecer) func(*Store) {
 	return func(s *Store) {
 		s.Conn = c
 	}
