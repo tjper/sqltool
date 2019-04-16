@@ -44,10 +44,10 @@ type Selector interface {
 	Select(Queryest) error
 }
 
-// Inserter is a single method interface that encapsulates the process of
+// Creator is a single method interface that encapsulates the process of
 // INSERTing an object's data into an Execer.
-type Inserter interface {
-	Insert(Execer) error
+type Creator interface {
+	Create(Execer) error
 }
 
 // Deletor is a single method interface that encapsulates the process of
@@ -65,7 +65,7 @@ type Updater interface {
 // Storer encompasses various store interfaces.
 type Storer interface {
 	Selector
-	Inserter
+	Creator
 	Deletor
 	Updater
 }
@@ -115,9 +115,9 @@ func (ds *Store) Select(s Selector) error {
 	return s.Select(ds.Conn)
 }
 
-// Insert inserts data into the Datastore as specified by the Inserter.
-func (ds *Store) Insert(i Inserter) error {
-	return i.Insert(ds.Conn)
+// Create inserts data into the Datastore as specified by the Creator.
+func (ds *Store) Create(c Creator) error {
+	return c.Create(ds.Conn)
 }
 
 // Delete deletes data from the Datastore as specified by the Deletor.
