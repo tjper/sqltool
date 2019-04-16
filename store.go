@@ -47,7 +47,7 @@ type Selector interface {
 // Creator is a single method interface that encapsulates the process of
 // INSERTing an object's data into an Execer.
 type Creator interface {
-	Create(Execer) error
+	Create(Queryest) error
 }
 
 // Deletor is a single method interface that encapsulates the process of
